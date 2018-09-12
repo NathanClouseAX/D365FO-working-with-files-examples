@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAX_FileDownloadAdvanced</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using FTPWebRequest = System.Net.FtpWebRequest;
+using WebRequest = System.Net.WebRequest;
+using NetworkCredential = System.Net.NetworkCredential;
+using WebRequestMethods = System.Net.WebRequestMethods;
+using Stream = System.IO.Stream;
+
+
+class AAX_FileDownloadAdvanced
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    public static void main(Args args)
+    {
+        TextStreamIo textStreamIo;
+
+        System.Byte[] buffer = new System.Byte[10240]();
+ 
+        System.IO.Stream fileStream = new System.IO.MemoryStream();
+
+        str targetFile = System.IO.Path::GetRandomFileName();
+        FtpWebRequest request = WebRequest::Create("ftp://nadummy.sharefileftp.com/test/test.txt");
+        request.Credentials = new NetworkCredential("userName", "password");    
+
+        using (Stream ftpStream = request.GetResponse().GetResponseStream())
+        {
+            int read = 0;
+            
+            while(true)
+            {
+                read = ftpStream.Read(buffer, 0, buffer.Length);
+                if(read > 0)
+                {
+                    fileStream.Write(buffer, 0, read);
+                    info(strFmt("Downloaded %1 bytes", fileStream.Position));
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        textStreamIo = textStreamIo::constructForRead(fileStream);
+        
+        info(con2Str(textStreamIo.read()));
+      
+        textStreamIo.finalize();
+        fileStream.Dispose();
+
+        info("Complete");
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

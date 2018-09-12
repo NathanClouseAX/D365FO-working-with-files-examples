@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAX_FTPDownloadSimple</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using System.Net;
+
+class AAX_FTPDownloadSimple
+{
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    public static void main(Args args)
+    {
+        System.Net.WebClient webClient = new System.Net.WebClient();
+        webClient.Credentials = new NetworkCredential("userName", "password");
+        webClient.DownloadFile("ftp://nadummy.sharefileftp.com/test/test.txt", @"C:\temp\test.txt");
+        info("complete");
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

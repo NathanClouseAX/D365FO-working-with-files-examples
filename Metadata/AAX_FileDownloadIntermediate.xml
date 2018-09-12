@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAX_FileDownloadIntermediate</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using System.IO;
+using WebClient = System.Net.WebClient;
+using NetworkCredential = System.Net.NetworkCredential;
+
+class AAX_FileDownloadIntermediate
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    public static void main(Args args)
+    {
+        TextIo textIo;
+
+        str inputfilepath = System.IO.Path::GetTempPath() + System.IO.Path::GetRandomFileName();
+        str ftphost = "nadummy.sharefileftp.com";
+        str ftpfilepath = "/test/test.txt";
+
+        str ftpfullpath = "ftp://" + ftphost + ftpfilepath;
+
+        using (WebClient request = new WebClient())
+        {
+            request.Credentials = new NetworkCredential("userName", "password");
+
+            System.Byte[] fileData = request.DownloadData(ftpfullpath);
+
+            using (System.IO.FileStream file = System.IO.File::Create(inputfilepath))
+            {
+                file.Write(fileData, 0, fileData.Length);
+                file.Close();
+            }
+            info("download Complete");
+        }
+
+        textIo = new TextIo(inputfilepath, "r");
+        
+        info(con2Str(textIo.read()));
+
+        TextIo.finalize();
+
+        System.IO.File::Delete(inputfilepath);
+
+        info("Complete");
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

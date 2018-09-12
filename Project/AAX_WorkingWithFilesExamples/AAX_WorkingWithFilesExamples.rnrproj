@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Configuration>Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <Model>FleetManagement</Model>
+    <DBSyncInBuild>True</DBSyncInBuild>
+    <GenerateFormAdaptors>False</GenerateFormAdaptors>
+    <Company>
+    </Company>
+    <Partition>initial</Partition>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <DataEntityExpandParentChildRelations>False</DataEntityExpandParentChildRelations>
+    <DataEntityUseLabelTextAsFieldName>False</DataEntityUseLabelTextAsFieldName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ProjectGuid>{61ad8a5c-4afa-4550-b572-c88bc3feab8c}</ProjectGuid>
+    <Name>AAX_WorkingWithFilesExamples</Name>
+    <RootNamespace>AAX_WorkingWithFilesExamples</RootNamespace>
+    <StartupObject>AAX_FileDownloadAdvanced</StartupObject>
+    <StartupType>Class</StartupType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Classes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AxClass\AAX_FileDownloadAdvanced">
+      <SubType>Content</SubType>
+      <Name>AAX_FileDownloadAdvanced</Name>
+      <Link>Classes\AAX_FileDownloadAdvanced</Link>
+    </Content>
+    <Content Include="AxClass\AAX_FileDownloadIntermediate">
+      <SubType>Content</SubType>
+      <Name>AAX_FileDownloadIntermediate</Name>
+      <Link>Classes\AAX_FileDownloadIntermediate</Link>
+    </Content>
+    <Content Include="AxClass\AAX_FTPDownloadSimple">
+      <SubType>Content</SubType>
+      <Name>AAX_FTPDownloadSimple</Name>
+      <Link>Classes\AAX_FTPDownloadSimple</Link>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Dynamics\AX\Microsoft.Dynamics.Framework.Tools.BuildTasks.targets" />
+</Project>
